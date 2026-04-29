@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using ThesisDB.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ThesisDbContext>(options =>
+    options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
@@ -11,6 +18,24 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    // Demodaten nur im Development-Environment einfügen
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<ThesisDbContext>();
+            DataSeeder.SeedData(context);
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred seeding the DB.");
+        }
+    }
 }
 
 app.UseHttpsRedirection();
