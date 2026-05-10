@@ -1,0 +1,179 @@
+﻿@model ThesisDB.Models.Review
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gutachten - @Model.Thesis.Student.LastName, @Model.Thesis.Student.FirstName</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2cm;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2cm;
+            border-bottom: 2px solid #333;
+            padding-bottom: 1cm;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 24pt; }
+        h2 { font-size: 14pt; margin-top: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .meta-data { margin-bottom: 2cm; }
+        .meta-data table { width: 100%; border-collapse: collapse; }
+        .meta-data td { padding: 5px 0; vertical-align: top; }
+        .meta-data td:first-child { font-weight: bold; width: 30%; }
+        .content-section { margin-bottom: 1.5cm; }
+        .content-text { white-space: pre-wrap; text-align: justify; }
+        .matrix { width: 100%; border-collapse: collapse; margin-bottom: 2cm; }
+        .matrix th, .matrix td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        .matrix th { background-color: #f5f5f5; }
+        .matrix td:first-child { text-align: left; font-weight: bold; width: 40%; }
+        .grade-section { text-align: right; font-size: 16pt; font-weight: bold; margin-bottom: 3cm; }
+        .signature-section { display: flex; justify-content: space-between; margin-top: 4cm; }
+        .signature-box { width: 45%; border-top: 1px solid #333; text-align: center; padding-top: 10px; }
+        
+        @@media print {
+            body { padding: 0; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print" style="margin-bottom: 20px; text-align: right;">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 12pt; cursor: pointer;">Drucken</button>
+        <button onclick="window.close()" style="padding: 10px 20px; font-size: 12pt; cursor: pointer;">Schließen</button>
+    </div>
+
+    <div class="header">
+        <h1>Gutachten zur @Model.Thesis.Type.ToString()arbeit</h1>
+        <div style="font-size: 12pt; color: #555;">
+            @if(Model.Thesis.StartDate.HasValue) { <span>Startdatum: @Model.Thesis.StartDate.Value.ToString("dd.MM.yyyy")</span> }
+            @if(Model.Thesis.StartDate.HasValue && Model.Thesis.EndDate.HasValue) { <span> | </span> }
+            @if(Model.Thesis.EndDate.HasValue) { <span>Enddatum: @Model.Thesis.EndDate.Value.ToString("dd.MM.yyyy")</span> }
+            <br />
+            Studiengang: @Model.Thesis.Programme?.Name
+        </div>
+    </div>
+
+    <div class="meta-data">
+        <table>
+            <tr>
+                <td>Titel der Arbeit:</td>
+                <td>@Model.Thesis.Title</td>
+            </tr>
+            <tr>
+                <td>Verfasser/in:</td>
+                <td>
+                    @Model.Thesis.Student.FirstName @Model.Thesis.Student.LastName<br />
+                    (Matr.-Nr. @Model.Thesis.Student.MatriculationNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>Betreuer/in:</td>
+                <td>@Model.Thesis.Supervisor.FirstName @Model.Thesis.Supervisor.LastName</td>
+            </tr>
+            <tr>
+                <td>Datum:</td>
+                <td>@DateTime.Now.ToString("dd.MM.yyyy")</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="content-section">
+        <h2>Zusammenfassung</h2>
+        <div class="content-text">@Model.Summary</div>
+    </div>
+
+    <div class="content-section">
+        <h2>Stärken</h2>
+        <div class="content-text">@Model.Strengths</div>
+    </div>
+
+    <div class="content-section">
+        <h2>Schwächen</h2>
+        <div class="content-text">@Model.Weaknesses</div>
+    </div>
+
+    <div class="content-section">
+        <h2>Zusammenfassende Bewertung</h2>
+        <div class="content-text">@Model.Evaluation</div>
+    </div>
+
+    <h2>Teilbewertungen</h2>
+    <table class="matrix">
+        <thead>
+            <tr>
+                <th>Kriterium</th>
+                <th>Bewertung (1-5)</th>
+                <th>Gewichtung (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Inhalt</td>
+                <td>@Model.ContentVal</td>
+                <td>@Model.ContentWt</td>
+            </tr>
+            <tr>
+                <td>Gestaltung</td>
+                <td>@Model.LayoutVal</td>
+                <td>@Model.LayoutWt</td>
+            </tr>
+            <tr>
+                <td>Aufbau</td>
+                <td>@Model.StructureVal</td>
+                <td>@Model.StructureWt</td>
+            </tr>
+            <tr>
+                <td>Sprache</td>
+                <td>@Model.StyleVal</td>
+                <td>@Model.StyleWt</td>
+            </tr>
+            <tr>
+                <td>Literaturanalyse</td>
+                <td>@Model.LiteratureVal</td>
+                <td>@Model.LiteratureWt</td>
+            </tr>
+            <tr>
+                <td>Schwierigkeit</td>
+                <td>@Model.DifficultyVal</td>
+                <td>@Model.DifficultyWt</td>
+            </tr>
+            <tr>
+                <td>Neuartigkeit</td>
+                <td>@Model.NoveltyVal</td>
+                <td>@Model.NoveltyWt</td>
+            </tr>
+            <tr>
+                <td>Themenerfassung</td>
+                <td>@Model.RichnessVal</td>
+                <td>@Model.RichnessWt</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="grade-section">
+        Gesamtnote: @Model.Grade.ToString("0.0", new System.Globalization.CultureInfo("de-DE"))
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            Ort, Datum
+        </div>
+        <div class="signature-box">
+            Unterschrift Gutachter/in<br />
+            (@Model.Thesis.Supervisor.FirstName @Model.Thesis.Supervisor.LastName)
+        </div>
+    </div>
+
+</body>
+</html>

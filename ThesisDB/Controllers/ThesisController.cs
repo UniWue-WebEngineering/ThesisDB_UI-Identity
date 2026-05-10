@@ -21,7 +21,7 @@ namespace ThesisDB.Controllers
         // GET: Thesis
         public async Task<IActionResult> Index()
         {
-            var thesisDbContext = _context.Theses.Include(t => t.Programme).Include(t => t.Student).Include(t => t.Supervisor);
+            var thesisDbContext = _context.Theses.Include(t => t.Programme).Include(t => t.Student).Include(t => t.Supervisor).Include(t => t.Review);
             return View(await thesisDbContext.ToListAsync());
         }
 

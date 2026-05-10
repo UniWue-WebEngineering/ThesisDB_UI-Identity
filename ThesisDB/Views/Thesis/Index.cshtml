@@ -65,6 +65,18 @@
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger" title="Löschen">
                         <i class="bi bi-trash-fill"></i>
                     </a>
+                    @if (item.Review == null)
+                    {
+                        <a asp-controller="Review" asp-action="Create" asp-route-thesisId="@item.Id" class="btn btn-outline-success" title="Gutachten erstellen">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Review" asp-action="Edit" asp-route-id="@item.Review.Id" class="btn btn-success" title="Gutachten bearbeiten">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </a>
+                    }
                 </div>
             </td>
         </tr>

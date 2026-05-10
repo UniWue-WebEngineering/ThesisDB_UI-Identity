@@ -1,0 +1,150 @@
+﻿@model ThesisDB.Models.Review
+
+@{
+    ViewData["Title"] = "Neues Gutachten";
+}
+
+<h1>Neues Gutachten</h1>
+<h2 class="h4 text-muted">@ViewBag.ThesisTitle</h2>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ThesisId" />
+
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label asp-for="Summary" class="control-label fw-bold"></label>
+            <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Summary" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Strengths" class="control-label fw-bold"></label>
+            <textarea asp-for="Strengths" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Strengths" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Weaknesses" class="control-label fw-bold"></label>
+            <textarea asp-for="Weaknesses" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Weaknesses" class="text-danger"></span>
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Evaluation" class="control-label fw-bold"></label>
+            <textarea asp-for="Evaluation" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Evaluation" class="text-danger"></span>
+        </div>
+    </div>
+
+    <h4 class="mt-4">Teilbewertungen</h4>
+    <table class="table table-bordered align-middle">
+        <thead>
+            <tr>
+                <th style="width: 40%;">Kriterium</th>
+                <th style="width: 30%;">Bewertung (1-5)</th>
+                <th style="width: 30%;">Gewichtung (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.ContentVal)</strong></td>
+                <td>
+                    <input asp-for="ContentVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="ContentVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="ContentWt" class="form-control" type="number" />
+                    <span asp-validation-for="ContentWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.LayoutVal)</strong></td>
+                <td>
+                    <input asp-for="LayoutVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="LayoutVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="LayoutWt" class="form-control" type="number" />
+                    <span asp-validation-for="LayoutWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.StructureVal)</strong></td>
+                <td>
+                    <input asp-for="StructureVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="StructureVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="StructureWt" class="form-control" type="number" />
+                    <span asp-validation-for="StructureWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.StyleVal)</strong></td>
+                <td>
+                    <input asp-for="StyleVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="StyleVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="StyleWt" class="form-control" type="number" />
+                    <span asp-validation-for="StyleWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.LiteratureVal)</strong></td>
+                <td>
+                    <input asp-for="LiteratureVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="LiteratureVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="LiteratureWt" class="form-control" type="number" />
+                    <span asp-validation-for="LiteratureWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.DifficultyVal)</strong></td>
+                <td>
+                    <input asp-for="DifficultyVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="DifficultyVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="DifficultyWt" class="form-control" type="number" />
+                    <span asp-validation-for="DifficultyWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.NoveltyVal)</strong></td>
+                <td>
+                    <input asp-for="NoveltyVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="NoveltyVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="NoveltyWt" class="form-control" type="number" />
+                    <span asp-validation-for="NoveltyWt" class="text-danger"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>@Html.DisplayNameFor(m => m.RichnessVal)</strong></td>
+                <td>
+                    <input asp-for="RichnessVal" class="form-control" type="number" min="1" max="5" />
+                    <span asp-validation-for="RichnessVal" class="text-danger"></span>
+                </td>
+                <td>
+                    <input asp-for="RichnessWt" class="form-control" type="number" />
+                    <span asp-validation-for="RichnessWt" class="text-danger"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <label asp-for="Grade" class="control-label fw-bold"></label>
+            <select asp-for="Grade" class="form-select" asp-items="ViewBag.GradeList"></select>
+            <span asp-validation-for="Grade" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mt-4 mb-5">
+        <input type="submit" value="Speichern" class="btn btn-primary" />
+        <a asp-controller="Thesis" asp-action="Index" class="btn btn-secondary">Abbrechen</a>
+    </div>
+</form>
