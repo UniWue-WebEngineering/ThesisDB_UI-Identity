@@ -1,0 +1,142 @@
+﻿@model IEnumerable<ThesisDB.Models.Programme>
+
+@{
+    ViewData["Title"] = "Studiengänge";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>@ViewData["Title"]</h1>
+
+        <table class="table align-middle" id="programme-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Id</th>
+                    <th>Name</th>
+                    <th style="width: 100px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="row-@item.Id">
+                        <td>@item.Id</td>
+                        <td id="name-td-@item.Id">@item.Name</td>
+                        <td class="text-end" id="actions-td-@item.Id">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" onclick="editRow(@item.Id, '@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(item.Name))')"><i class="bi bi-pencil-fill"></i></button>
+                                @if (item.Theses.Any())
+                                {
+                                    <button type="button" class="btn btn-outline-secondary" disabled><i class="bi bi-trash-fill"></i></button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)"><i class="bi bi-trash-fill"></i></button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+                
+                <tr id="new-entry-row" style="display: none;">
+                    <td></td>
+                    <td>
+                        <form asp-action="Create" method="post" id="create-form" class="m-0 p-0">
+                            <input type="text" name="Name" class="form-control w-100" placeholder="Name" required />
+                        </form>
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-success" onclick="document.getElementById('create-form').submit();"><i class="bi bi-check-lg"></i></button>
+                            <button type="button" class="btn btn-danger" onclick="cancelNewEntry()"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button id="new-entry-btn" class="btn btn-primary">Neuer Eintrag</button>
+
+    </div>
+</div>
+
+<form id="delete-form" asp-action="Delete" method="post" style="display: none;">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="delete-id" name="id" />
+</form>
+
+<form id="edit-form-template" action="/Programmes/Edit" method="post" style="display: none;" class="m-0 p-0 w-100">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="edit-id" name="Id" />
+    <input type="text" id="edit-name" name="Name" class="form-control w-100" required />
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById('new-entry-btn').addEventListener('click', function () {
+            this.style.display = 'none';
+            document.getElementById('new-entry-row').style.display = 'table-row';
+        });
+
+        function cancelNewEntry() {
+            document.getElementById('new-entry-row').style.display = 'none';
+            document.getElementById('new-entry-btn').style.display = 'block';
+            document.querySelector('#create-form input[name="Name"]').value = '';
+        }
+
+        function confirmDelete(id) {
+            if (confirm("Sind Sie sicher, dass Sie diesen Datensatz löschen möchten?")) {
+                document.getElementById('delete-id').value = id;
+                document.getElementById('delete-form').submit();
+            }
+        }
+
+        var currentEditId = null;
+        var originalNameHtml = '';
+        var originalActionsHtml = '';
+
+        function editRow(id, name) {
+            // Restore previously edited row if any
+            if (currentEditId !== null) {
+                var prevRow = document.getElementById('row-' + currentEditId);
+                if (prevRow) {
+                    document.getElementById('name-td-' + currentEditId).innerHTML = originalNameHtml;
+                    document.getElementById('actions-td-' + currentEditId).innerHTML = originalActionsHtml;
+                }
+            }
+
+            currentEditId = id;
+            var nameTd = document.getElementById('name-td-' + id);
+            var actionsTd = document.getElementById('actions-td-' + id);
+
+            originalNameHtml = nameTd.innerHTML;
+            originalActionsHtml = actionsTd.innerHTML;
+
+            // Extract anti forgery token for edit
+            var token = document.querySelector('#edit-form-template input[name="__RequestVerificationToken"]').value;
+
+            nameTd.innerHTML = `
+                <form action="/Programmes/Edit/${id}" method="post" id="edit-form-${id}" class="m-0 p-0 w-100">
+                    <input type="hidden" name="__RequestVerificationToken" value="${token}" />
+                    <input type="hidden" name="Id" value="${id}" />
+                    <input type="text" name="Name" value="${name}" class="form-control w-100" required />
+                </form>
+            `;
+
+            actionsTd.innerHTML = `
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-success" onclick="document.getElementById('edit-form-${id}').submit();"><i class="bi bi-check-lg"></i></button>
+                    <button type="button" class="btn btn-danger" onclick="cancelEdit(${id})"><i class="bi bi-x-lg"></i></button>
+                </div>
+            `;
+        }
+
+        function cancelEdit(id) {
+            if (currentEditId === id) {
+                document.getElementById('name-td-' + id).innerHTML = originalNameHtml;
+                document.getElementById('actions-td-' + id).innerHTML = originalActionsHtml;
+                currentEditId = null;
+            }
+        }
+    </script>
+}
