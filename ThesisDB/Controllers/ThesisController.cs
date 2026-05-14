@@ -106,7 +106,9 @@ namespace ThesisDB.Controllers
                 return NotFound();
             }
 
-            var thesis = await _context.Theses.FindAsync(id);
+            var thesis = await _context.Theses
+                .Include(t => t.Student)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (thesis == null)
             {
                 return NotFound();
@@ -150,6 +152,11 @@ namespace ThesisDB.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            // Load Student to populate the view model properly on error
+            if (thesis.StudentId.HasValue)
+            {
+                thesis.Student = await _context.Students.FindAsync(thesis.StudentId.Value);
             }
             PopulateDropdowns(thesis);
             return View(thesis);
@@ -199,8 +206,6 @@ namespace ThesisDB.Controllers
         private void PopulateDropdowns(Thesis thesis = null)
         {
             ViewData["ProgrammeId"] = new SelectList(_context.Programmes, "Id", "Name", thesis?.ProgrammeId);
-            var students = _context.Students.Select(s => new { Id = s.Id, DisplayName = s.LastName + ", " + s.FirstName + " (" + s.MatriculationNumber + ")" }).ToList();
-            ViewData["StudentId"] = new SelectList(students, "Id", "DisplayName", thesis?.StudentId);
             var supervisors = _context.Supervisors.Select(s => new { Id = s.Id, DisplayName = s.LastName + ", " + s.FirstName }).ToList();
             ViewData["SupervisorId"] = new SelectList(supervisors, "Id", "DisplayName", thesis?.SupervisorId);
         }
