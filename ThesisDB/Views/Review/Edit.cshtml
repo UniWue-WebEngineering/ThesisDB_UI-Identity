@@ -56,92 +56,155 @@
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.ContentVal)</strong></td>
                 <td>
-                    <input asp-for="ContentVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="ContentVal" type="hidden" />
+                    <div class="star-rating" data-target="#ContentVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="ContentVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="ContentWt" class="form-control" type="number" />
+                    <input asp-for="ContentWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="ContentWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.LayoutVal)</strong></td>
                 <td>
-                    <input asp-for="LayoutVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="LayoutVal" type="hidden" />
+                    <div class="star-rating" data-target="#LayoutVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="LayoutVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="LayoutWt" class="form-control" type="number" />
+                    <input asp-for="LayoutWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="LayoutWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.StructureVal)</strong></td>
                 <td>
-                    <input asp-for="StructureVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="StructureVal" type="hidden" />
+                    <div class="star-rating" data-target="#StructureVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="StructureVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="StructureWt" class="form-control" type="number" />
+                    <input asp-for="StructureWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="StructureWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.StyleVal)</strong></td>
                 <td>
-                    <input asp-for="StyleVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="StyleVal" type="hidden" />
+                    <div class="star-rating" data-target="#StyleVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="StyleVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="StyleWt" class="form-control" type="number" />
+                    <input asp-for="StyleWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="StyleWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.LiteratureVal)</strong></td>
                 <td>
-                    <input asp-for="LiteratureVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="LiteratureVal" type="hidden" />
+                    <div class="star-rating" data-target="#LiteratureVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="LiteratureWt" class="form-control" type="number" />
+                    <input asp-for="LiteratureWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="LiteratureWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.DifficultyVal)</strong></td>
                 <td>
-                    <input asp-for="DifficultyVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="DifficultyVal" type="hidden" />
+                    <div class="star-rating" data-target="#DifficultyVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="DifficultyWt" class="form-control" type="number" />
+                    <input asp-for="DifficultyWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="DifficultyWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.NoveltyVal)</strong></td>
                 <td>
-                    <input asp-for="NoveltyVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="NoveltyVal" type="hidden" />
+                    <div class="star-rating" data-target="#NoveltyVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="NoveltyWt" class="form-control" type="number" />
+                    <input asp-for="NoveltyWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="NoveltyWt" class="text-danger"></span>
                 </td>
             </tr>
             <tr>
                 <td><strong>@Html.DisplayNameFor(m => m.RichnessVal)</strong></td>
                 <td>
-                    <input asp-for="RichnessVal" class="form-control" type="number" min="1" max="5" />
+                    <input asp-for="RichnessVal" type="hidden" />
+                    <div class="star-rating" data-target="#RichnessVal">
+                        <i class="bi bi-star text-secondary star-icon" data-note="5" data-stars="1" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="4" data-stars="2" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="3" data-stars="3" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="2" data-stars="4" style="cursor: pointer; font-size: 1.5rem;"></i>
+                        <i class="bi bi-star text-secondary star-icon" data-note="1" data-stars="5" style="cursor: pointer; font-size: 1.5rem;"></i>
+                    </div>
                     <span asp-validation-for="RichnessVal" class="text-danger"></span>
                 </td>
                 <td>
-                    <input asp-for="RichnessWt" class="form-control" type="number" />
+                    <input asp-for="RichnessWt" class="form-control weight-input" type="number" />
                     <span asp-validation-for="RichnessWt" class="text-danger"></span>
                 </td>
             </tr>
         </tbody>
+        <tfoot class="table-secondary">
+            <tr>
+                <td><strong>Notenvorschlag</strong></td>
+                <td id="suggestedGrade" class="text-center fw-bold fs-5"></td>
+                <td><span id="weightSumBadge" class="badge"></span></td>
+            </tr>
+        </tfoot>
     </table>
 
     <div class="row mt-4">
@@ -182,3 +245,122 @@
     </div>
   </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const starContainers = document.querySelectorAll('.star-rating');
+
+            function updateStars(container, note) {
+                const stars = container.querySelectorAll('.star-icon');
+                let filledCount = 0;
+                if (!isNaN(note) && note >= 1 && note <= 5) {
+                    filledCount = 6 - note;
+                }
+
+                stars.forEach((star, index) => {
+                    star.classList.remove('bi-star', 'bi-star-fill', 'text-secondary', 'text-dark');
+                    if (filledCount === 0) {
+                        star.classList.add('bi-star', 'text-secondary');
+                    } else {
+                        if (index < filledCount) {
+                            star.classList.add('bi-star-fill', 'text-dark');
+                        } else {
+                            star.classList.add('bi-star', 'text-dark');
+                        }
+                    }
+                });
+            }
+
+            starContainers.forEach(container => {
+                const targetSelector = container.getAttribute('data-target');
+                const hiddenInput = document.querySelector(targetSelector);
+
+                const initialNote = parseInt(hiddenInput.value);
+                updateStars(container, initialNote);
+
+                const stars = container.querySelectorAll('.star-icon');
+                stars.forEach(star => {
+                    star.addEventListener('click', function () {
+                        const note = parseInt(this.getAttribute('data-note'));
+                        hiddenInput.value = note;
+                        updateStars(container, note);
+                        calculateSuggestion();
+                    });
+                });
+            });
+
+            const weightInputs = document.querySelectorAll('.weight-input');
+            weightInputs.forEach(input => {
+                input.addEventListener('input', calculateSuggestion);
+                input.addEventListener('change', calculateSuggestion);
+            });
+
+            function calculateSuggestion() {
+                let allSet = true;
+                let sumWeights = 0;
+                let weightedSum = 0;
+
+                const partials = [
+                    { valId: '#ContentVal', wtId: '#ContentWt' },
+                    { valId: '#LayoutVal', wtId: '#LayoutWt' },
+                    { valId: '#StructureVal', wtId: '#StructureWt' },
+                    { valId: '#StyleVal', wtId: '#StyleWt' },
+                    { valId: '#LiteratureVal', wtId: '#LiteratureWt' },
+                    { valId: '#DifficultyVal', wtId: '#DifficultyWt' },
+                    { valId: '#NoveltyVal', wtId: '#NoveltyWt' },
+                    { valId: '#RichnessVal', wtId: '#RichnessWt' }
+                ];
+
+                partials.forEach(p => {
+                    const valInput = document.querySelector(p.valId);
+                    const wtInput = document.querySelector(p.wtId);
+
+                    if (!valInput || !wtInput) {
+                        allSet = false;
+                        return;
+                    }
+
+                    const val = parseInt(valInput.value);
+                    const wt = parseFloat(wtInput.value);
+
+                    if (isNaN(val) || val < 1 || val > 5) {
+                        allSet = false;
+                    }
+                    if (isNaN(wt)) {
+                        allSet = false;
+                    } else {
+                        sumWeights += wt;
+                    }
+
+                    if (!isNaN(val) && val >= 1 && val <= 5 && !isNaN(wt)) {
+                        weightedSum += val * wt;
+                    }
+                });
+
+                const badge = document.getElementById('weightSumBadge');
+                if (badge) {
+                    badge.textContent = sumWeights + ' %';
+                    badge.classList.remove('bg-success', 'bg-warning', 'text-dark');
+                    if (sumWeights === 100) {
+                        badge.classList.add('bg-success');
+                    } else {
+                        badge.classList.add('bg-warning', 'text-dark');
+                    }
+                }
+
+                const suggestionCell = document.getElementById('suggestedGrade');
+                if (suggestionCell) {
+                    if (allSet && sumWeights > 0) {
+                        const suggestion = weightedSum / sumWeights;
+                        suggestionCell.textContent = suggestion.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    } else {
+                        suggestionCell.textContent = '';
+                    }
+                }
+            }
+
+            calculateSuggestion();
+        });
+    </script>
+}

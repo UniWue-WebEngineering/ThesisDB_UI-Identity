@@ -165,14 +165,7 @@ namespace ThesisDB.Controllers
             var grades = new[] { 1.0, 1.3, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 5.0 };
             var gradeList = grades.Select(g => new SelectListItem
             {
-                // To avoid culture issues with double model binding where "1.3" vs "1,3" causes validation or scaling by 10 errors,
-                // we explicitly format the value using the InvariantCulture (which guarantees a dot) and
-                // let the MVC ModelBinder correctly parse it, OR we format it exactly as a string if we had to.
-                // However, since MVC often struggles with localized double parsing in dropdowns out of the box,
-                // a safe bet is to use string-based values that match exactly what the user sees, OR use Invariant and let MVC parse it.
-                // The problem "23.0" implies it read "2.3" and ignored the dot, treating it as "23", which happens when Culture is DE and it expects a comma.
-                // By providing a comma explicitly for BOTH Value and Text, it will parse correctly on a DE server.
-                Value = g.ToString("0.0", new System.Globalization.CultureInfo("de-DE")),
+                Value = g.ToString("0.#", new System.Globalization.CultureInfo("de-DE")),
                 Text = g.ToString("0.0", new System.Globalization.CultureInfo("de-DE")),
                 Selected = selectedGrade.HasValue && System.Math.Abs(selectedGrade.Value - g) < 0.01
             }).ToList();

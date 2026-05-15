@@ -27,6 +27,7 @@ namespace ThesisDB.Controllers
                 .Include(t => t.Programme)
                 .Include(t => t.Student)
                 .Include(t => t.Supervisor)
+                .Include(t => t.Review)
                 .AsQueryable();
 
             if (!String.IsNullOrEmpty(searchString))
