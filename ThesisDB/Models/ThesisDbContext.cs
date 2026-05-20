@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ThesisDB.Models
 {
-    public class ThesisDbContext : DbContext
+    public class ThesisDbContext : IdentityDbContext<ThesisDbUser>
     {
         public ThesisDbContext(DbContextOptions<ThesisDbContext> options) : base(options)
         {
@@ -16,6 +17,8 @@ namespace ThesisDB.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Thesis>()
                 .Property(t => t.Status)
                 .HasConversion<string>();
